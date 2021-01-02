@@ -459,6 +459,7 @@ int main( int argc, char* args[] )
 			//While application is running
 			while( !quit )
 			{
+				SDL_Delay(100); //Need this for window to close on windows using VcXsrv with ubuntu subsystem
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
