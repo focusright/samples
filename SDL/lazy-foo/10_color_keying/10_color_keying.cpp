@@ -1,9 +1,12 @@
+//https://lazyfoo.net/tutorials/SDL/10_color_keying/index.php
+//g++ -Wall 10_color_keying.cpp -lSDL2 -lSDL2_image -o test
+
 /*This source code copyrighted by Lazy Foo' Productions (2004-2020)
 and may not be redistributed without written permission.*/
 
 //Using SDL, SDL_image, standard IO, and strings
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <string>
 
@@ -207,14 +210,14 @@ bool loadMedia()
 	bool success = true;
 
 	//Load Foo' texture
-	if( !gFooTexture.loadFromFile( "10_color_keying/foo.png" ) )
+	if( !gFooTexture.loadFromFile( "foo.png" ) )
 	{
 		printf( "Failed to load Foo' texture image!\n" );
 		success = false;
 	}
 	
 	//Load background texture
-	if( !gBackgroundTexture.loadFromFile( "10_color_keying/background.png" ) )
+	if( !gBackgroundTexture.loadFromFile( "background.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
@@ -265,6 +268,7 @@ int main( int argc, char* args[] )
 			//While application is running
 			while( !quit )
 			{
+				SDL_Delay(100); //Need this for window to close on windows using VcXsrv with ubuntu subsystem
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
