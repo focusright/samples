@@ -150,7 +150,7 @@ bool LTexture::loadFromFile( std::string path )
 	else
 	{
 		//Convert surface to display format
-		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface, SDL_PIXELFORMAT_RGB888, 0 );
+		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface, SDL_GetWindowPixelFormat( gWindow ), 0 );
 		if( formattedSurface == NULL )
 		{
 			printf( "Unable to convert loaded surface to display format! %s\n", SDL_GetError() );
@@ -158,7 +158,7 @@ bool LTexture::loadFromFile( std::string path )
 		else
 		{
 			//Create blank streamable texture
-			newTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
+			newTexture = SDL_CreateTexture( gRenderer, SDL_GetWindowPixelFormat( gWindow ), SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
 			if( newTexture == NULL )
 			{
 				printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
@@ -253,7 +253,7 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
 bool LTexture::createBlank( int width, int height )
 {
 	//Create uninitialized texture
-	mTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, width, height );
+	mTexture = SDL_CreateTexture( gRenderer, SDL_GetWindowPixelFormat( gWindow ), SDL_TEXTUREACCESS_STREAMING, width, height );
 	if( mTexture == NULL )
 	{
 		printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
@@ -426,7 +426,7 @@ bool DataStream::loadMedia()
 		}
 		else
 		{
-			mImages[ i ] = SDL_ConvertSurfaceFormat( loadedSurface, SDL_PIXELFORMAT_RGB888, 0 );
+			mImages[ i ] = SDL_ConvertSurfaceFormat( loadedSurface, SDL_GetWindowPixelFormat( gWindow ), 0 );
 		}
 
 		SDL_FreeSurface( loadedSurface );
@@ -581,6 +581,7 @@ int main( int argc, char* args[] )
 			//While application is running
 			while( !quit )
 			{
+				SDL_Delay(500);
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
