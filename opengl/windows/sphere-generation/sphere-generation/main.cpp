@@ -10,6 +10,8 @@
 #include <tuple>
 #include <map>
 #include <array>
+#include <iostream>
+#include <string>
 
 struct v3
 {
@@ -395,6 +397,15 @@ int CALLBACK WinMain(
   TriangleList triangles;
 
   std::tie(vertices, triangles)=make_spherified_cube_seams(6);
+
+  for (auto&& triangle : triangles) {
+    std::cout << std::to_string(triangle.vertex[0]) + ", " + std::to_string(triangle.vertex[1]) + ", " + std::to_string(triangle.vertex[2]) + ", ";
+  }
+  std::cout << std::endl;
+  for (auto&& vertex : vertices) {
+      std::cout << "{{" + std::to_string(vertex.position.data[0]) + ", " + std::to_string(vertex.position.data[1]) + ", " + std::to_string(vertex.position.data[2]) + "},";
+      std::cout << "{" + std::to_string(vertex.color.data[0]) + ", " + std::to_string(vertex.color.data[1]) + ", " + std::to_string(vertex.color.data[2]) + "}}, ";
+  }
 
   bool quit=false;
   float angle=0.f;
