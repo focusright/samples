@@ -1,4 +1,4 @@
-//https://www.youtube.com/watch?v=RTk6W67dyR4
+//https://youtu.be/RTk6W67dyR4
 #include <GL/glut.h>
 
 void display() {
